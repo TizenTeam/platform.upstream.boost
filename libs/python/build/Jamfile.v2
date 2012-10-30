@@ -51,6 +51,7 @@ project boost/python
   : requirements
     -<tag>@$(BOOST_JAMROOT_MODULE)%$(BOOST_JAMROOT_MODULE).tag
     <tag>@$(__name__).tag
+	<cxxflags>-fno-strict-aliasing
   ;
 
 rule tag ( name : type ? : property-set )
