@@ -28,9 +28,9 @@ namespace
 
 detail::new_reference dict_base::call(object const& arg_)
 {
+    union { PyTypeObject *ptop; PyObject *pop; }pun = { &PyDict_Type };
     return (detail::new_reference)PyObject_CallFunction(
-        (PyObject*)&PyDict_Type, const_cast<char*>("(O)"), 
-        arg_.ptr());
+        pun.pop, const_cast<char*>("(O)"), arg_.ptr());
 }
 
 dict_base::dict_base()

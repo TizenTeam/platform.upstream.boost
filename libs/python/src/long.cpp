@@ -8,16 +8,16 @@ namespace boost { namespace python { namespace detail {
 
 new_non_null_reference long_base::call(object const& arg_)
 {
+    union { PyTypeObject *ptop; PyObject *pop; }pun = { &PyLong_Type };
     return (detail::new_non_null_reference)PyObject_CallFunction(
-        (PyObject*)&PyLong_Type, const_cast<char*>("(O)"), 
-        arg_.ptr());
+        pun.pop, const_cast<char*>("(O)"), arg_.ptr());
 }
 
 new_non_null_reference long_base::call(object const& arg_, object const& base)
 {
+    union { PyTypeObject *ptop; PyObject *pop; }pun = { &PyLong_Type };
     return (detail::new_non_null_reference)PyObject_CallFunction(
-        (PyObject*)&PyLong_Type, const_cast<char*>("(OO)"), 
-        arg_.ptr(), base.ptr());
+        pun.pop, const_cast<char*>("(OO)"), arg_.ptr(), base.ptr());
 }
 
 long_base::long_base()
@@ -25,7 +25,12 @@ long_base::long_base()
         detail::new_reference(
             PyObject_CallFunction((PyObject*)&PyLong_Type, const_cast<char*>("()")))
         )
-{}
+{
+    union { PyTypeObject *ptop; PyObject *pop; }pun = { &PyLong_Type };
+    object(detail::new_reference(
+            PyObject_CallFunction(pun.pop, const_cast<char*>("()"))));
+}
+
 
 long_base::long_base(object_cref arg)
     : object(long_base::call(arg))

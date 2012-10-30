@@ -10,11 +10,11 @@ namespace boost { namespace python { namespace detail {
 
 detail::new_non_null_reference list_base::call(object const& arg_)
 {
+    union{ PyTypeObject *ptop; PyObject *pop; }pun = { &PyList_Type };
     return (detail::new_non_null_reference)
         (expect_non_null)(
             PyObject_CallFunction(
-                (PyObject*)&PyList_Type, const_cast<char*>("(O)"), 
-                arg_.ptr()));
+                pun.pop, const_cast<char*>("(O)"), arg_.ptr()));
 }
 
 list_base::list_base()

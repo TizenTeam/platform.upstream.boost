@@ -9,14 +9,14 @@ namespace boost { namespace python { namespace detail {
 
 detail::new_reference str_base::call(object const& arg_)
 {
-    return (detail::new_reference)PyObject_CallFunction(
 #if PY_VERSION_HEX >= 0x03000000
-        (PyObject*)&PyUnicode_Type,
+    union { PyTypeObject *ptop; PyObject *pop; }pun = { &PyUnicode_Type };
 #else
-        (PyObject*)&PyString_Type, 
+    union { PyTypeObject *ptop; PyObject *pop; }pun = { &PyString_Type };
 #endif
-        const_cast<char*>("(O)"), 
-        arg_.ptr());
+
+    return (detail::new_reference)PyObject_CallFunction(
+        pun.pop, const_cast<char*>("(O)"), arg_.ptr());
 } 
 
 str_base::str_base()
