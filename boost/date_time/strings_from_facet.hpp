@@ -21,8 +21,9 @@ namespace boost { namespace date_time {
  *  all the month strings from a locale.  This is handy when building
  *  custom date parsers or formatters that need to be localized.
  *
- *@param charT The type of char to use when gathering typically char
- *             or wchar_t.
+ *! charT The type of char to use when gathering, typically char
+ *        or wchar_t.
+ *
  *@param locale The locale to use when gathering the strings
  *@param short_strings True(default) to gather short strings,
  *                     false for long strings.
@@ -71,8 +72,9 @@ gather_month_strings(const std::locale& locale, bool short_strings=true)
  *  'Sunday'.  This is handy when building custom date parsers or
  *  formatters that need to be localized.
  *
- *@param charT The type of char to use when gathering typically char
- *             or wchar_t.
+ *! charT The type of char to use when gathering, typically char
+ *        or wchar_t.
+ *
  *@param locale The locale to use when gathering the strings
  *@param short_strings True(default) to gather short strings,
  *                     false for long strings.

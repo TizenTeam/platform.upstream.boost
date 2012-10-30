@@ -401,7 +401,7 @@ namespace boost { namespace program_options {
     typed_value<T, wchar_t>*
     wvalue(T* v);
 
-    /** Works the same way as the 'value<bool>' function, but the created
+    /** Works the same way as the 'value&lt;bool&gt;' function, but the created
         value_semantic won't accept any explicit value. So, if the option 
         is present on the command line, the value will be 'true'.
     */

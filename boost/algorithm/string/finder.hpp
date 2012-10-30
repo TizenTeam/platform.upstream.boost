@@ -43,7 +43,6 @@ namespace boost {
             The result is given as an \c iterator_range delimiting the match.
 
             \param Search A substring to be searched for.
-            \param Comp An element comparison predicate
             \return An instance of the \c first_finder object
         */
         template<typename RangeT>
@@ -62,6 +61,7 @@ namespace boost {
         //! "First" finder
         /*!
             \overload
+            \param Comp An element comparison predicate
         */
         template<typename RangeT,typename PredicateT>
         inline detail::first_finderF<
@@ -84,7 +84,6 @@ namespace boost {
             The result is given as an \c iterator_range delimiting the match.
 
             \param Search A substring to be searched for.
-            \param Comp An element comparison predicate
             \return An instance of the \c last_finder object
         */
         template<typename RangeT>
@@ -102,6 +101,7 @@ namespace boost {
         //! "Last" finder
         /*!
             \overload
+            \param Comp An element comparison predicate
         */
         template<typename RangeT, typename PredicateT>
         inline detail::last_finderF<
@@ -124,7 +124,6 @@ namespace boost {
 
             \param Search A substring to be searched for.
             \param Nth An index of the match to be find
-            \param Comp An element comparison predicate
             \return An instance of the \c nth_finder object
         */
         template<typename RangeT>
@@ -144,6 +143,7 @@ namespace boost {
         //! "Nth" finder
         /*!
             \overload
+            \param Comp An element comparison predicate
         */
         template<typename RangeT, typename PredicateT>
         inline detail::nth_finderF<
@@ -230,7 +230,6 @@ namespace boost {
 
             \param Begin Beginning of the range
             \param End End of the range
-            \param Range The range.
             \return An instance of the \c range_finger object
         */
         template< typename ForwardIteratorT >
@@ -245,6 +244,7 @@ namespace boost {
         //! "Range" finder
         /*!       
             \overload
+            \param Range The range.
         */
         template< typename ForwardIteratorT >
         inline detail::range_finderF<ForwardIteratorT>

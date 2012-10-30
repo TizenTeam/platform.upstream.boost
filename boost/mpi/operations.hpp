@@ -13,7 +13,7 @@
  *  This header provides a mapping from function objects to @c MPI_Op
  *  constants used in MPI collective operations. It also provides
  *  several new function object types not present in the standard @c
- *  <functional> header that have direct mappings to @c MPI_Op.
+ *  &lt;functional&gt; header that have direct mappings to @c MPI_Op.
  */
 #ifndef BOOST_MPI_IS_MPI_OP_HPP
 #define BOOST_MPI_IS_MPI_OP_HPP

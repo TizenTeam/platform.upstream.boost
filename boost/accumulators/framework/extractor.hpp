@@ -94,7 +94,6 @@ struct extractor
     };
 
     /// Extract the result associated with Feature from the accumulator set
-    /// \param acc The accumulator set object from which to extract the result
     template<typename Arg1>
     typename detail::extractor_result<Arg1, Feature>::type
     operator ()(Arg1 const &arg1) const
@@ -106,6 +105,7 @@ struct extractor
 
     /// \overload
     ///
+    /// \param acc The accumulator set object from which to extract the result
     /// \param a1 Optional named parameter to be passed to the accumulator's result() function.
     template<typename AccumulatorSet, typename A1>
     typename detail::extractor_result<AccumulatorSet, Feature>::type

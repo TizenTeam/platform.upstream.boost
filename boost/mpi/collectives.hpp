@@ -219,10 +219,6 @@ all_to_all(const communicator& comm, const T* in_values, int n, T* out_values);
  *   non-roots will reshape the objects held in their proxies based on
  *   the skeleton sent from the root.
  *
- *   @param n When supplied, the number of values that the pointer @p
- *   values points to, for broadcasting an array of values. The value
- *   of @p n must be the same for all processes in @p comm.
- *
  *   @param root The rank/process ID of the process that will be
  *   transmitting the value.
  */
@@ -231,6 +227,10 @@ void broadcast(const communicator& comm, T& value, int root);
 
 /**
  * \overload
+ *   @param n When supplied, the number of values that the pointer @p
+ *   values points to, for broadcasting an array of values. The value
+ *   of @p n must be the same for all processes in @p comm.
+ *
  */
 template<typename T>
 void broadcast(const communicator& comm, T* values, int n, int root);

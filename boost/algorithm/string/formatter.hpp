@@ -76,8 +76,6 @@ namespace boost {
             Constructs an \c empty_formatter. Empty formatter always returns an empty
             sequence. 
 
-            \param Input container used to select a correct value_type for the
-                         resulting empty_container<>.
             \return An instance of the \c empty_formatter object.
         */
         template<typename RangeT>

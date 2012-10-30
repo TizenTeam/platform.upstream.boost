@@ -234,7 +234,6 @@ struct accumulator_set
 
     ///////////////////////////////////////////////////////////////////////////////
     /// Accumulation
-    /// \param a1 Optional named parameter to be passed to all the accumulators
     void operator ()()
     {
         this->visit(
@@ -244,6 +243,7 @@ struct accumulator_set
         );
     }
 
+    /// \param a1 Optional named parameter to be passed to all the accumulators
     template<typename A1>
     void operator ()(A1 const &a1)
     {

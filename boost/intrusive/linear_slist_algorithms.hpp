@@ -60,7 +60,7 @@ class linear_slist_algorithms
 
    #if defined(BOOST_INTRUSIVE_DOXYGEN_INVOKED)
 
-   //! <b>Effects</b>: Constructs an non-used list element, putting the next
+   //! <b>Effects</b>: Constructs n non-used list element, putting the next
    //!   pointer to null:
    //!  <tt>NodeTraits::get_next(this_node) == node_ptr()</tt>
    //!
