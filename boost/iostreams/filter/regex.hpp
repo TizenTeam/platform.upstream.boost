@@ -58,7 +58,7 @@ private:
                 return;
             iterator first(&src[0], &src[0] + src.size(), re_, flags_);
             iterator last;
-            const Ch* suffix = 0;
+            const Ch* suffix = &src[0];
             for (; first != last; ++first) {
                 dest.insert( dest.end(), 
                              first->prefix().first,
