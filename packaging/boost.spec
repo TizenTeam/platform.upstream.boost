@@ -9,12 +9,12 @@
 
 %define disable_long_double 0
 
-%define boost_libs1 libboost_date_time libboost_filesystem%{lib_appendix} libboost_graph%{lib_appendix}
-%define boost_libs2 libboost_iostreams libboost_math%{lib_appendix} libboost_test%{lib_appendix}
-%define boost_libs3 libboost_program_options libboost_python%{lib_appendix} libboost_serialization%{lib_appendix}
-%define boost_libs4 libboost_signals libboost_system%{lib_appendix} libboost_thread%{lib_appendix}
-%define boost_libs5 libboost_wave libboost_regex%{lib_appendix} libboost_regex%{lib_appendix}
-%define boost_libs6 libboost_random libboost_chrono%{lib_appendix} libboost_locale%{lib_appendix}
+%define boost_libs1 libboost_date_time libboost_filesystem libboost_graph
+%define boost_libs2 libboost_iostreams libboost_math libboost_test
+%define boost_libs3 libboost_program_options libboost_python libboost_serialization
+%define boost_libs4 libboost_signals libboost_system libboost_thread
+%define boost_libs5 libboost_wave libboost_regex libboost_regex
+%define boost_libs6 libboost_random libboost_chrono libboost_locale
 %define boost_libs7 libboost_timer
 
 %define all_libs %boost_libs0 %boost_libs2 %boost_libs3 %boost_libs4 %boost_libs5 %boost_libs6 %boost_libs7
@@ -69,7 +69,13 @@ see the boost-doc package.
 %package        devel
 Summary:        Development package for Boost C++
 Group:          Development/Libraries/C and C++
-Requires:       %{all_libs}
+Requires:       libboost_date_time libboost_filesystem libboost_graph
+Requires:       libboost_iostreams libboost_math libboost_test
+Requires:       libboost_program_options libboost_python libboost_serialization
+Requires:       libboost_signals libboost_system libboost_thread
+Requires:       libboost_wave libboost_regex libboost_regex
+Requires:       libboost_random libboost_chrono libboost_locale
+Requires:       libboost_timer
 Requires:       libstdc++-devel
 
 %description    devel
@@ -314,14 +320,6 @@ using python : ${PYTHON_VERSION} : %{_prefix} ;
 EOF
 
 
-%if %build_mpi
-cat << EOF >>user-config.jam
-using mpi ;
-EOF
-
-# Set PATH, MANPATH and LD_LIBRARY_PATH
-source /var/mpi-selector/data/$(rpm --qf "%{NAME}-%{VERSION}" -q openmpi).sh
-%endif
 
 sh ./bootstrap.sh
 ./b2
@@ -355,9 +353,6 @@ export EXPAT_INCLUDE=/usr/include EXPAT_LIBPATH=%{_libdir} REGEX_FLAGS="--with-i
 export PYTHON_FLAGS
 
 # Set PATH, MANPATH and LD_LIBRARY_PATH
-%if %build_mpi
-source /var/mpi-selector/data/$(rpm --qf "%{NAME}-%{VERSION}" -q openmpi).sh
-%endif
 
 %{_bindir}/bjam ${BJAM_CONFIG} ${LONG_DOUBLE_FLAGS} --user-config=user-config.jam \
 	--prefix=%{buildroot}%{_prefix} \
@@ -422,9 +417,6 @@ rm -f %{buildroot}%{_libdir}/*.a
 %post -n libboost_thread -p /sbin/ldconfig
 %post -n libboost_math -p /sbin/ldconfig 
 
-%if %build_mpi
-%post -n libboost_mpi -p /sbin/ldconfig       
-%endif
 
 %post -n libboost_graph -p /sbin/ldconfig
 %post -n libboost_system -p /sbin/ldconfig
@@ -446,9 +438,6 @@ rm -f %{buildroot}%{_libdir}/*.a
 %postun -n libboost_thread -p /sbin/ldconfig
 %postun -n libboost_math -p /sbin/ldconfig
 
-%if %build_mpi
-%postun -n libboost_mpi -p /sbin/ldconfig
-%endif
 
 %postun -n libboost_graph -p /sbin/ldconfig
 %postun -n libboost_system -p /sbin/ldconfig
@@ -482,13 +471,6 @@ rm -f %{buildroot}%{_libdir}/*.a
 %defattr(-, root, root, -)
 %{_libdir}/libboost_math_*.so.*
 
-%if %build_mpi
-
-%files -n libboost_mpi
-%defattr(-, root, root, -)
-%{_libdir}/libboost_mpi*.so.*
-%{_libdir}/mpi.so
-%endif
 
 %files -n libboost_test
 %defattr(-, root, root, -)
@@ -547,10 +529,6 @@ rm -f %{buildroot}%{_libdir}/*.a
 %defattr(-, root, root, -)
 %{_includedir}/boost
 %{_libdir}/*.so
-%if %build_mpi
-%exclude %{_libdir}/mpi.so
-%endif
-#%%{_datadir}/aclocal/*.m4
 
 
 %changelog
