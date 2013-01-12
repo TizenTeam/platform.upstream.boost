@@ -1,3 +1,6 @@
+* Sat Jan 12 2013 Anas Nashif <anas.nashif@intel.com> submit/trunk/20121229.051952@fffe0f9
+- use TIME_UTC_ instead of TIME_UTC
+
 * Fri Dec 28 2012 Anas Nashif <anas.nashif@intel.com> upstream/1.49.0@71b07fb
 - Provide old package names
 
