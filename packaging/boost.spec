@@ -43,6 +43,7 @@ Release:        0
 Source0:        %{name}_%{file_version}.tar.bz2
 Source1:        boost-rpmlintrc
 Source4:        existing_extra_docs
+Source1001: 	boost.manifest
 
 %define _docdir %{_datadir}/doc/packages/boost
 
@@ -272,6 +273,7 @@ This package contains the Boost::Timer runtime library.
 
 %prep
 %setup -q -n %{name}_%{file_version} 
+cp %{SOURCE1001} .
 #everything in the tarball has the executable flag set ...
 find -type f ! \( -name \*.sh -o -name \*.py -o -name \*.pl \) -exec chmod -x {} +
 
@@ -448,84 +450,104 @@ rm -f %{buildroot}%{_libdir}/*.a
 %postun -n libboost_timer -p /sbin/ldconfig
 
 %files -n boost-license
+%manifest %{name}.manifest
 %defattr(-, root, root, -)
 ##%doc %{_docdir}/LICENSE_1_0.txt
 
 %files -n libboost_date_time
+%manifest %{name}.manifest
 %defattr(-, root, root, -)
 %{_libdir}/libboost_date_time*.so.*
 
 %files -n libboost_filesystem
+%manifest %{name}.manifest
 %defattr(-, root, root, -)
 %{_libdir}/libboost_filesystem*.so.*
 
 %files -n libboost_graph
+%manifest %{name}.manifest
 %defattr(-, root, root, -)
 %{_libdir}/libboost_graph*.so.*
 
 %files -n libboost_iostreams
+%manifest %{name}.manifest
 %defattr(-, root, root, -)
 %{_libdir}/libboost_iostreams*.so.*
 
 %files -n libboost_math
+%manifest %{name}.manifest
 %defattr(-, root, root, -)
 %{_libdir}/libboost_math_*.so.*
 
 
 %files -n libboost_test
+%manifest %{name}.manifest
 %defattr(-, root, root, -)
 %{_libdir}/libboost_prg_exec_monitor*.so.*
 %{_libdir}/libboost_unit_test_framework*.so.*
 
 %files -n libboost_program_options
+%manifest %{name}.manifest
 %defattr(-, root, root, -)
 %{_libdir}/libboost_program_options*.so.*
 
 %files -n libboost_python
+%manifest %{name}.manifest
 %defattr(-, root, root, -)
 %{_libdir}/libboost_python*.so.*
 
 %files -n libboost_serialization
+%manifest %{name}.manifest
 %defattr(-, root, root, -)
 %{_libdir}/libboost_*serialization*.so.*
 
 %files -n libboost_signals
+%manifest %{name}.manifest
 %defattr(-, root, root, -)
 %{_libdir}/libboost_signals*.so.*
 
 %files -n libboost_system
+%manifest %{name}.manifest
 %defattr(-, root, root, -)
 %{_libdir}/libboost_system*.so.*
 
 %files -n libboost_thread
+%manifest %{name}.manifest
 %defattr(-, root, root, -)
 %{_libdir}/libboost_thread*.so.*
 
 %files -n libboost_wave
+%manifest %{name}.manifest
 %defattr(-, root, root, -)
 %{_libdir}/libboost_wave*.so.*
 
 %files -n libboost_regex
+%manifest %{name}.manifest
 %defattr(-, root, root, -)
 %{_libdir}/libboost_regex*.so.*
 
 %files -n libboost_random
+%manifest %{name}.manifest
 %defattr(-, root, root, -)
 %{_libdir}/libboost_random*.so.*
 
 %files -n libboost_chrono
+%manifest %{name}.manifest
 %defattr(-, root, root, -)
 %{_libdir}/libboost_chrono*.so.*
 
 %files -n libboost_locale
+%manifest %{name}.manifest
 %defattr(-, root, root, -)
 %{_libdir}/libboost_locale*.so.*
 
 %files -n libboost_timer
+%manifest %{name}.manifest
 %defattr(-, root, root, -)
 %{_libdir}/libboost_timer*.so.*
 
 %files devel
+%manifest %{name}.manifest
 %defattr(-, root, root, -)
 %{_includedir}/boost
 %{_libdir}/*.so
