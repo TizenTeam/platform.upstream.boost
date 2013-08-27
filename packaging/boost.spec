@@ -1,6 +1,6 @@
-%define ver 1.49.0
-%define file_version 1_49_0
-%define short_version 1_49
+%define ver 1.51.0
+%define file_version 1_51_0
+%define short_version 1_51
 
 #Define to 0 to not generate the pdf documentation
 %define build_pdf 0
@@ -37,8 +37,8 @@ BuildRequires:  fdupes
 Url:            http://www.boost.org
 Summary:        Boost C++ Libraries
 License:        BSD-3-Clause
-Group:          Development/Libraries/C and C++
-Version:        1.49.0
+Group:          Base/Libraries
+Version:        1.51.0
 Release:        0
 Source0:        %{name}_%{file_version}.tar.bz2
 Source1:        boost-rpmlintrc
@@ -69,7 +69,6 @@ see the boost-doc package.
 
 %package        devel
 Summary:        Development package for Boost C++
-Group:          Development/Libraries/C and C++
 Requires:       libboost_date_time libboost_filesystem libboost_graph
 Requires:       libboost_iostreams libboost_math libboost_test
 Requires:       libboost_program_options libboost_python libboost_serialization
@@ -88,7 +87,6 @@ the documentation packages (html, man or pdf).
 
 %package     -n boost-license
 Summary:        Boost License
-Group:          Development/Libraries/C and C++
 BuildArch:      noarch
 
 %description    -n boost-license
@@ -97,7 +95,6 @@ This package contains the license boost is provided under.
 
 %package        -n libboost_date_time
 Summary:        Boost::Date.Time Runtime libraries
-Group:          System/Libraries
 Requires:       boost-license
 Provides:       boost-datetime
 
@@ -107,7 +104,6 @@ This package contains the Boost Date.Time runtime libraries.
 
 %package     -n libboost_filesystem
 Summary:        Boost::Filesystem Runtime Libraries
-Group:          System/Localization
 Requires:       boost-license
 Provides:       boost-filesystem
 
@@ -117,17 +113,22 @@ This package contains the Boost::Filesystem libraries.
 
 %package        -n libboost_graph
 Summary:        Boost::Graph Runtime Libraries
-Group:          System/Libraries
 Requires:       boost-license
 Provides:       boost-graph
 
 %description    -n libboost_graph
 This package contains the Boost::Graph Runtime libraries.
 
+%package        -n libboost_context
+Summary:        Run-Time component of boost context switching library
+Requires:       boost-license
+
+%description -n libboost_context
+Run-Time support for Boost.Context, a foundational library that
+provides a sort of cooperative multitasking on a single thread.
 
 %package        -n libboost_iostreams
 Summary:        Boost::IOStreams Runtime Libraries
-Group:          System/Libraries
 Requires:       boost-license
 Provides:       boost-iostreams
 
@@ -137,7 +138,6 @@ This package contains the Boost::IOStreams Runtime libraries.
 
 %package        -n libboost_math
 Summary:        Boost::Math Runtime Libraries
-Group:          System/Libraries
 Requires:       boost-license
 Provides:       boost-math
 
@@ -148,7 +148,6 @@ This package contains the Boost::Math Runtime libraries.
 
 %package        -n libboost_test
 Summary:        Boost::Test Runtime Libraries
-Group:          System/Libraries
 Requires:       boost-license
 Provides:       boost-test
 
@@ -158,7 +157,6 @@ This package contains the Boost::Test runtime libraries.
 
 %package        -n libboost_program_options
 Summary:        Boost::ProgramOptions Runtime libraries
-Group:          System/Libraries
 Requires:       boost-license
 Provides:       boost-program-options
 
@@ -168,7 +166,6 @@ This package contains the Boost::ProgramOptions Runtime libraries.
 
 %package        -n libboost_python
 Summary:        Boost::Python Runtime Libraries
-Group:          System/Libraries
 Requires:       boost-license
 Provides:       boost-python
 
@@ -178,7 +175,6 @@ This package contains the Boost::Python Runtime libraries.
 
 %package        -n libboost_serialization
 Summary:        Boost::Serialization Runtime Libraries
-Group:          System/Libraries
 Requires:       boost-license
 Provides:       boost-serialization
 
@@ -188,7 +184,6 @@ This package contains the Boost::Serialization Runtime libraries.
 
 %package        -n libboost_signals
 Summary:        Boost::Signals Runtime Libraries
-Group:          System/Libraries
 Requires:       boost-license
 
 %description    -n libboost_signals
@@ -197,7 +192,6 @@ This package contains the Boost::Signals Runtime libraries.
 
 %package        -n libboost_system
 Summary:        Boost::System Runtime Libraries
-Group:          System/Libraries
 Requires:       boost-license
 Provides:       boost-system
 
@@ -207,7 +201,6 @@ This package contains the Boost::System runtime libraries.
 
 %package        -n libboost_thread
 Summary:        Boost::Thread Runtime Libraries
-Group:          System/Libraries
 Requires:       boost-license
 Provides:       boost-thread
 
@@ -217,7 +210,6 @@ This package contains the Boost::Thread runtime libraries.
 
 %package        -n libboost_wave
 Summary:        Boost::Wave Runtime Libraries
-Group:          System/Libraries
 Requires:       boost-license
 Provides:       boost-wave
 
@@ -227,7 +219,6 @@ This package contains the Boost::Wave runtime libraries.
 
 %package        -n libboost_regex
 Summary:        The Boost::Regex runtime library
-Group:          System/Libraries
 Requires:       boost-license
 Provides:       boost-regex
 
@@ -236,7 +227,6 @@ This package contains the Boost::Regex runtime library.
 
 %package        -n libboost_random
 Summary:        The Boost::Random runtime library
-Group:          System/Libraries
 Requires:       boost-license
 Provides:       boost-random
 
@@ -245,7 +235,6 @@ This package contains the Boost::Random runtime library.
 
 %package        -n libboost_chrono
 Summary:        The Boost::Chrono runtime library
-Group:          System/Libraries
 Requires:       boost-license
 Provides:       boost-chrono
 
@@ -254,7 +243,6 @@ This package contains the Boost::Chrono runtime library.
 
 %package        -n libboost_locale
 Summary:        The Boost::Locale runtime library
-Group:          System/Libraries
 Requires:       boost-license
 Provides:       boost-locale
 
@@ -263,7 +251,6 @@ This package contains the Boost::Locale runtime library.
 
 %package        -n libboost_timer
 Summary:        The Boost::Timer runtime library
-Group:          System/Libraries
 Requires:       boost-license
 Provides:       boost-timer
 
@@ -420,6 +407,7 @@ rm -f %{buildroot}%{_libdir}/*.a
 %post -n libboost_math -p /sbin/ldconfig 
 
 
+%post -n libboost_context -p /sbin/ldconfig
 %post -n libboost_graph -p /sbin/ldconfig
 %post -n libboost_system -p /sbin/ldconfig
 %post -n libboost_wave -p /sbin/ldconfig
@@ -429,6 +417,7 @@ rm -f %{buildroot}%{_libdir}/*.a
 %post -n libboost_timer -p /sbin/ldconfig
 
 %postun -n libboost_date_time -p /sbin/ldconfig
+%postun -n libboost_context -p /sbin/ldconfig
 %postun -n libboost_filesystem -p /sbin/ldconfig
 %postun -n libboost_iostreams -p /sbin/ldconfig
 %postun -n libboost_test -p /sbin/ldconfig
@@ -545,6 +534,12 @@ rm -f %{buildroot}%{_libdir}/*.a
 %manifest %{name}.manifest
 %defattr(-, root, root, -)
 %{_libdir}/libboost_timer*.so.*
+
+%files -n libboost_context
+%manifest %{name}.manifest
+%defattr(-, root, root, -)
+%{_libdir}/libboost_context*.so.*
+
 
 %files devel
 %manifest %{name}.manifest
