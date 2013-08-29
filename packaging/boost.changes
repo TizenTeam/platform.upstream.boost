@@ -1,3 +1,6 @@
+* Thu Aug 29 2013 Anas Nashif <anas.nashif@intel.com> submit/tizen/20130827.111941@86fbc3f
+- build with glibc 2.18
+
 * Tue Aug 27 2013 Anas Nashif <anas.nashif@intel.com> submit/tizen/20130827.055530@2c102b0
 - Apply patch to protect invalid UTF8 sequences and overflow of ordered_malloc()
 - update to 1.51.0
