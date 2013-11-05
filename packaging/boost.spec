@@ -36,7 +36,7 @@ BuildRequires:  xz
 BuildRequires:  fdupes
 Url:            http://www.boost.org
 Summary:        Boost C++ Libraries
-License:        BSD-3-Clause
+License:        BSL-1.0
 Group:          Base/Libraries
 Version:        1.51.0
 Release:        0
@@ -440,6 +440,7 @@ rm -f %{buildroot}%{_libdir}/*.a
 
 %files -n boost-license
 %manifest %{name}.manifest
+%license LICENSE_1_0.txt
 %defattr(-, root, root, -)
 ##%doc %{_docdir}/LICENSE_1_0.txt
 
