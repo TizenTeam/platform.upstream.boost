@@ -119,6 +119,7 @@ Provides:       boost-graph
 %description    -n libboost_graph
 This package contains the Boost::Graph Runtime libraries.
 
+%ifnarch aarch64
 %package        -n libboost_context
 Summary:        Run-Time component of boost context switching library
 Requires:       boost-license
@@ -126,6 +127,7 @@ Requires:       boost-license
 %description -n libboost_context
 Run-Time support for Boost.Context, a foundational library that
 provides a sort of cooperative multitasking on a single thread.
+%endif
 
 %package        -n libboost_iostreams
 Summary:        Boost::IOStreams Runtime Libraries
@@ -311,7 +313,11 @@ EOF
 
 
 sh ./bootstrap.sh
-./b2
+%ifarch aarch64
+./b2 %{?_smp_mflags} -q  --without-context
+%else
+./b2 %{?_smp_mflags} -q
+%endif
 
 
 %install
@@ -407,7 +413,9 @@ rm -f %{buildroot}%{_libdir}/*.a
 %post -n libboost_math -p /sbin/ldconfig 
 
 
+%ifnarch aarch64
 %post -n libboost_context -p /sbin/ldconfig
+%endif
 %post -n libboost_graph -p /sbin/ldconfig
 %post -n libboost_system -p /sbin/ldconfig
 %post -n libboost_wave -p /sbin/ldconfig
@@ -417,7 +425,9 @@ rm -f %{buildroot}%{_libdir}/*.a
 %post -n libboost_timer -p /sbin/ldconfig
 
 %postun -n libboost_date_time -p /sbin/ldconfig
+%ifnarch aarch64
 %postun -n libboost_context -p /sbin/ldconfig
+%endif
 %postun -n libboost_filesystem -p /sbin/ldconfig
 %postun -n libboost_iostreams -p /sbin/ldconfig
 %postun -n libboost_test -p /sbin/ldconfig
@@ -536,10 +546,12 @@ rm -f %{buildroot}%{_libdir}/*.a
 %defattr(-, root, root, -)
 %{_libdir}/libboost_timer*.so.*
 
+%ifnarch aarch64
 %files -n libboost_context
 %manifest %{name}.manifest
 %defattr(-, root, root, -)
 %{_libdir}/libboost_context*.so.*
+%endif
 
 
 %files devel
