@@ -45,6 +45,10 @@ Source1:        boost-rpmlintrc
 Source4:        existing_extra_docs
 Source1001: 	boost.manifest
 
+%if ! %{?license:0}
+%define license %doc
+%endif
+
 %define _docdir %{_datadir}/doc/packages/boost
 
 %description
